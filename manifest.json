@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Betha Contabil",
+  "description": "Utilitários",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "./images/bth.png"
+  },
+  "permissions": ["activeTab", "scripting"]
+}

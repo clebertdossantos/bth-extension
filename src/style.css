@@ -1,0 +1,95 @@
+.form {
+    background-color: #f8f8f8;
+    width: 300px;
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+}
+
+.div {
+    background-color: #f8f8f8;
+    width: 300px;
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    border-radius: 5px;
+}
+
+.input {
+    background-color: #f8f8f8;
+    width: 90%; 
+    padding: 10px;
+    outline: none;  
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+}
+
+.button{
+ width: 100%;
+ padding: 5px;
+ border: none;
+ border-radius: 5px;
+ margin-top: 2px;
+ cursor: pointer;
+ font-weight: 700;
+ color:white;
+ cursor: pointer;
+ background-color: #499a7b;
+}
+.button:hover {
+    background-color: #499a7b;
+
+}
+
+.btnContext{
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: 700;
+    color:white;
+    cursor: pointer;
+    background-color: coral;
+}
+.btnContext:hover {
+    background-color: coral;
+}
+
+
+.btnSwagger {
+    width: 30%;
+    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: none;
+    font-size: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    color:white;
+    cursor: pointer;
+    margin: 5 10 0 0;
+    background-color: rgb(0, 153, 255);
+    
+}
+.btnSwagger:hover {
+    background-color: rgb(0, 9, 139);
+}
+
+
+#dbtn {
+    width: 300px;
+}
+
+.hd{
+    margin-left: auto;  
+    margin-right: auto;
+    text-transform: uppercase; 
+}
+
