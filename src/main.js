@@ -21,6 +21,12 @@ const getDadosSistema = () => {
     "patrimonio.betha.cloud",
     "convenios.betha.cloud",
     "monitor-dfe.betha.cloud",
+    "contabil-release.test.betha.cloud",
+    "planejamento-release.test.betha.cloud",
+    "tesouraria-release.test.betha.cloud",
+    "contabil.test.betha.cloud",
+    "planejamento.test.betha.cloud",
+    "tesouraria.test.betha.cloud",
   ];
   if (system.includes(sistema)) {
     alert(atob(entity));
