@@ -1,11 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "Betha Contabil",
+  "name": "Betha Contábil",
   "description": "Utilitários",
   "version": "1.0",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://contabil.betha.cloud/*"],
   "action": {
     "default_popup": "index.html",
     "default_icon": "./images/bth.png"
   },
-  "permissions": ["activeTab", "scripting"]
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://contabil.betha.cloud/*"],
+      "js": ["content.js"]
+    }
+  ]
 }

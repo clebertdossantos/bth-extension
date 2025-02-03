@@ -4,6 +4,8 @@ const btnContext = document.querySelector("#btnContext");
 const btncontabil = document.querySelector("#btncontabil");
 const btnplanejamento = document.querySelector("#btnplanejamento");
 const btntesouraria = document.querySelector("#btntesouraria");
+const btnsaldoinicial = document.querySelector("#btnsaldoinicial");
+
 // const db = require("../data/db.json");
 
 const getDadosSistema = () => {
@@ -30,6 +32,30 @@ const getDadosSistema = () => {
   ];
   if (system.includes(sistema)) {
     alert(atob(entity));
+  }
+};
+
+const excluirSaldoInicial = () => {
+  let url = window.location.href.split("/");
+
+  for (let it of url.reverse()) {
+    if ("saldos-iniciais" === it) {
+      let confirmacao = confirm(
+        "Iniciando exclusão dos saldos iniciais...\nTem certeza de que deseja continuar?"
+      );
+
+      if (confirmacao) {
+        // Executar clique nos ícones de exclusão apenas se o usuário confirmar
+        document
+          .querySelectorAll('[class="fa fa-trash-o fa-fw"]')
+          .forEach((item) => {
+            item.click();
+          });
+      } else {
+        alert("Exclusão cancelada pelo usuário.");
+      }
+      break; // Parar o loop após encontrar a URL correta
+    }
   }
 };
 
@@ -86,4 +112,14 @@ btntesouraria.addEventListener("click", () => {
   chrome.tabs.create({
     url: `https://swagger.betha.cloud/?configUrl=https://52sn0onf7i.execute-api.us-east-1.amazonaws.com/prod/apiDocumentation?grupo%3Dservice-layer-tesouraria#`,
   });
+});
+
+btnsaldoinicial.addEventListener("click", async (env) => {
+  env.preventDefault();
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: excluirSaldoInicial,
+  });
+  window.close();
 });
