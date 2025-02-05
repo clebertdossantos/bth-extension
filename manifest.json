@@ -1,21 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Betha Contábil",
-  "description": "Utilitários",
+  "name": "BTH Extension",
   "version": "1.0",
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["https://contabil.betha.cloud/*"],
+  "description": "Extensão para auxiliar no desenvolvimento Betha",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
   "action": {
-    "default_popup": "index.html",
-    "default_icon": "./images/bth.png"
+    "default_popup": "index.html"
   },
   "background": {
     "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": ["https://contabil.betha.cloud/*"],
-      "js": ["content.js"]
-    }
-  ]
+  }
 }

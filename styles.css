@@ -1,0 +1,89 @@
+.dbtn-container {
+  margin: 20px 0;
+  padding: 15px;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f5f5f5;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dbtn-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2196F3;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dbtn-button:hover {
+  background-color: #1976D2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.dbtn-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Variações de cores para diferentes tipos de botões */
+.dbtn-button#btncontabil {
+  background-color: #4CAF50;
+}
+
+.dbtn-button#btncontabil:hover {
+  background-color: #388E3C;
+}
+
+.dbtn-button#btnplanejamento {
+  background-color: #FF9800;
+}
+
+.dbtn-button#btnplanejamento:hover {
+  background-color: #F57C00;
+}
+
+.dbtn-button#btntesouraria {
+  background-color: #9C27B0;
+}
+
+.dbtn-button#btntesouraria:hover {
+  background-color: #7B1FA2;
+}
+
+/* Adicionar após os outros estilos de botões */
+.dbtn-button#btnsaldoinicial {
+  background-color: #E91E63;  /* Rosa */
+}
+
+.dbtn-button#btnsaldoinicial:hover {
+  background-color: #C2185B;  /* Rosa mais escuro */
+}
+
+.atalhos-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.atalhos-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#dbtn {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+} 
