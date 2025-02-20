@@ -43,18 +43,26 @@ const excluirSaldoInicial = () => {
   let url = window.location.href.split("/");
 
   for (let it of url.reverse()) {
-    if ("saldos-iniciais" === it) {
+    if (["saldos-iniciais","ambiente-escrituracao"].includes(it)) {
       let confirmacao = confirm(
         "Iniciando exclusão dos saldos iniciais...\nTem certeza de que deseja continuar?"
       );
 
       if (confirmacao) {
+        if(it === "ambiente-escrituracao"){
+          document
+            .querySelectorAll('[class="fa fa-trash fa-fw"]')
+            .forEach((item) => {
+              item.click();
+            });
+        }else{
+          document
+            .querySelectorAll('[class="fa fa-trash-o fa-fw"]')
+            .forEach((item) => {
+              item.click();
+            });
+        }
         // Executar clique nos ícones de exclusão apenas se o usuário confirmar
-        document
-          .querySelectorAll('[class="fa fa-trash-o fa-fw"]')
-          .forEach((item) => {
-            item.click();
-          });
       } else {
         alert("Exclusão cancelada pelo usuário.");
       }
@@ -176,9 +184,10 @@ btnjiraconclusao.addEventListener('click', async (env) => {
     function: () => {
       let url = window.location.href.split("/");
       let isJIRA = url.includes('desenv.betha.com.br')
-      if(!isJIRA) return ;
+      if(!isJIRA) return;
       let textarea = document.querySelector('[class="textarea long-field wiki-textfield"]')
-      if(!textarea) return ;
+      if(!textarea) textarea = document.querySelector('[class="textarea long-field"]');
+      if(!textarea) return;
       textarea.value = `Bom dia, 
 
 Orquestração realizada conforme solicitado.
