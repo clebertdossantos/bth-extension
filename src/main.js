@@ -7,7 +7,7 @@ const btntesouraria = document.querySelector("#btntesouraria");
 const btnsaldoinicial = document.querySelector("#btnsaldoinicial");
 const btnescsaldoinicial = document.querySelector("#btnescsaldoinicial");
 const btnjiraconclusao = document.querySelector("#btnjiraconclusao");
-
+const btnsincroniza = document.querySelector("#btnsincroniza");
 
 // const db = require("../data/db.json");
 
@@ -38,24 +38,25 @@ const getDadosSistema = () => {
   }
 };
 
+const sincronizarLdo = () => {};
 
 const excluirSaldoInicial = () => {
   let url = window.location.href.split("/");
 
   for (let it of url.reverse()) {
-    if (["saldos-iniciais","ambiente-escrituracao"].includes(it)) {
+    if (["saldos-iniciais", "ambiente-escrituracao"].includes(it)) {
       let confirmacao = confirm(
         "Iniciando exclusão dos saldos iniciais...\nTem certeza de que deseja continuar?"
       );
 
       if (confirmacao) {
-        if(it === "ambiente-escrituracao"){
+        if (it === "ambiente-escrituracao") {
           document
             .querySelectorAll('[class="fa fa-trash fa-fw"]')
             .forEach((item) => {
               item.click();
             });
-        }else{
+        } else {
           document
             .querySelectorAll('[class="fa fa-trash-o fa-fw"]')
             .forEach((item) => {
@@ -136,7 +137,6 @@ btnsaldoinicial.addEventListener("click", async (env) => {
   window.close();
 });
 
-
 btnescsaldoinicial.addEventListener("click", async (env) => {
   env.preventDefault();
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -145,26 +145,30 @@ btnescsaldoinicial.addEventListener("click", async (env) => {
     function: () => {
       let url = window.location.href.split("/");
       for (let it of url.reverse()) {
-        if (["saldos-iniciais","lancamentos-abertura"].includes(it)) {
+        if (["saldos-iniciais", "lancamentos-abertura"].includes(it)) {
           console.log("URL identificada, iniciando processamento...");
-          let botoesEditar = document.querySelectorAll('.fa.fa-pencil.fa-fw');
+          let botoesEditar = document.querySelectorAll(".fa.fa-pencil.fa-fw");
           console.log("Botões encontrados:", botoesEditar.length);
           async function processarItens() {
             for (let item of botoesEditar) {
               item.click();
-              await new Promise(resolve => setTimeout(resolve, 500));
-              let botaoSalvar = document.querySelector('#btnSaldosIniciaisItensCadEscriturar');
+              await new Promise((resolve) => setTimeout(resolve, 500));
+              let botaoSalvar = document.querySelector(
+                "#btnSaldosIniciaisItensCadEscriturar"
+              );
               if (botaoSalvar) {
                 botaoSalvar.click();
-              }else {
-                botaoSalvar = document.querySelector('#btnLancamentosContabeisCadEscriturar');
-                if(botaoSalvar){
+              } else {
+                botaoSalvar = document.querySelector(
+                  "#btnLancamentosContabeisCadEscriturar"
+                );
+                if (botaoSalvar) {
                   botaoSalvar.click();
-                }else{
+                } else {
                   console.warn("Botão de salvar não encontrado!");
                 }
               }
-              await new Promise(resolve => setTimeout(resolve, 1000));
+              await new Promise((resolve) => setTimeout(resolve, 1000));
             }
           }
           processarItens();
@@ -176,26 +180,72 @@ btnescsaldoinicial.addEventListener("click", async (env) => {
   window.close();
 });
 
-btnjiraconclusao.addEventListener('click', async (env) => {
+btnjiraconclusao.addEventListener("click", async (env) => {
   env.preventDefault();
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
     function: () => {
       let url = window.location.href.split("/");
-      let isJIRA = url.includes('desenv.betha.com.br')
-      if(!isJIRA) return;
-      let textarea = document.querySelector('[class="textarea long-field wiki-textfield"]')
-      if(!textarea) textarea = document.querySelector('[class="textarea long-field"]');
-      if(!textarea) return;
+      let isJIRA = url.includes("desenv.betha.com.br");
+      if (!isJIRA) return;
+      let textarea = document.querySelector(
+        '[class="textarea long-field wiki-textfield"]'
+      );
+      if (!textarea)
+        textarea = document.querySelector('[class="textarea long-field"]');
+      if (!textarea) return;
       textarea.value = `Bom dia, 
 
 Orquestração realizada conforme solicitado.
 
 Atenciosamente,
-*Desenvolvimento - Vertical Contábil*`
-    }
+*Desenvolvimento - Vertical Contábil*`;
+    },
   });
   window.close();
-})
+});
 
+btnsincroniza.addEventListener("click", async (env) => {
+  env.preventDefault();
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: () => {
+      let url = window.location.href.split("/");
+      let ehReceita = url.includes("receitas");
+      let ehDespesa = url.includes("despesas");
+      for (let it of url.reverse()) {
+        if (["ldo", "loa", "ppa"].includes(it)) {
+          let botoesEditar = document.querySelectorAll(".fa.fa-pencil.fa-fw");
+          console.log("Botões encontrados:", botoesEditar.length);
+          async function processarItens() {
+            for (let item of botoesEditar) {
+              item.click();
+              await new Promise((resolve) => setTimeout(resolve, 500));
+              let botaoSalvar = document.querySelector(
+                "#btnReceitasCadLdoSalvar"
+              );
+              if (botaoSalvar) {
+                botaoSalvar.click();
+              } else {
+                botaoSalvar = document.querySelector(
+                  "#btnModalSalvarDespesaAlteracoesPpa"
+                );
+                if (botaoSalvar) {
+                  botaoSalvar.click();
+                } else {
+                  console.warn("Botão de salvar não encontrado!");
+                }
+              }
+              await new Promise((resolve) => setTimeout(resolve, 1000));
+            }
+          }
+          processarItens();
+          break;
+        }
+      }
+    },
+  });
+  window.close();
+});
